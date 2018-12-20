@@ -1,0 +1,251 @@
+body {
+}
+.menu-container {
+    display: inline-block;
+}
+.import-loading {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    z-index: 9989;
+    fill: #3B8A4D;
+    bottom: 50px;
+    right: 15px;
+}
+
+.authentificate {
+    width: 180px;
+}
+
+.authentificate img {
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.authentificate strong {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.authentificate .auth-succ {
+    padding-bottom: 30px;
+    margin-bottom: 0;
+}
+
+.authentificate .auth-succ a {
+    float: right;
+    margin-bottom: 7px;
+    text-transform: capitalize;
+    text-decoration: none;
+    color: chocolate;
+}
+
+.infoBull .description {
+    display: block;
+    font-size: 12px;
+}
+
+.infoBull.succ-import .description {
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    color: green;
+}
+
+.infoBull img {
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.infoBull img.success-img {
+    display: none;
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    opacity: 0.8;
+    width: 40px;
+}
+
+.infoBull.succ-import img.product-img {
+    width: 220px;
+    margin-left: -20px;
+}
+
+.infoBull.alert {
+    width: 180px;
+}
+
+.infoBull.alert.alert-danger {
+    padding-bottom: 15px;
+    margin-bottom: 0px;
+}
+
+.btn.btn-primary {
+    text-transform: uppercase;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn-import {
+    height: 31px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.btn-import:focus {
+    outline: none;
+}
+
+.menu-container {
+
+}
+
+.advanced-card,
+.card {
+    width: 320px;
+}
+
+.card .cover {
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px 4px 0 0;
+}
+
+.card .cover {
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px 4px 0 0;
+}
+
+.card .cover button {
+    position: relative;
+}
+
+.card .cover img {
+    width: 100%;
+}
+
+.card .user {
+    border-radius: 50%;
+    display: block;
+    height: 120px;
+    margin: -55px auto 0;
+    overflow: hidden;
+    width: 120px;
+}
+
+.card .user img {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 4px solid #FFFFFF;
+    width: 100%;
+}
+
+.card .content ,
+.advanced-card .content {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 10px 20px 20px;
+}
+
+.card .content .price,
+.card .content .original-price ,
+.advanced-card .content .original-price {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.card .content .discount {
+    display: inline-block;
+}
+
+.card .content .original-price {
+    text-decoration: line-through;
+}
+
+.card .content .main ,
+.advanced-card .content .main {
+    min-height: 10px;
+}
+
+.card .content .main form .radioCheck ,
+.advanced-card .content .main form .radioCheck {
+    margin-right: 10px;
+}
+
+.card .content .main form #inputActive ,
+.advanced-card .content .main form #inputActive {
+    display: initial;
+    margin-left: 15px;
+    height: 30px;
+    position: absolute;
+}
+
+.card .back .content .main ,
+.advanced-card .back .content .main {
+    height: 215px;
+}
+
+.card .name {
+    font-family: 'Arima Madurai', cursive;
+    font-size: 22px;
+    line-height: 28px;
+    margin: 10px 0 0;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.card h5 ,
+.advanced-card h5 {
+    margin: 5px 0;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.card .footer ,
+.advanced-card .footer {
+    border-top: 1px solid #EEEEEE;
+    color: #999999;
+    /* position: absolute; */
+    bottom: 1px;
+    text-align: center;
+}
+
+.card .footer .btn-simple ,
+.advanced-card .footer .btn-simple {
+    margin-top: -6px;
+}
+.advanced-card textarea {
+    height: 105px;
+}
+.card .header ,
+.advanced-card .header {
+    padding: 15px 20px;
+    height: 90px;
+}
+
+#treeCategories {
+    width: 210px;
+    display: inline-block;
+}
+.categories-list-menu {
+    float: right;
+}
+#treeCategories .list-group-item {
+    padding: 1px 5px;
+}
+#treeCategories .list-group-item a{
+    font-size: 11px;
+}
