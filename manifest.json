@@ -2,14 +2,14 @@
 "update_url": "https://clients2.google.com/service/update2/crx",
 
   "manifest_version": 2,
-  "name": "Aliexpress Importer for Prestashop",
-  "short_name" : "AliexpressDropShipping",
-  "description": " Import aliexpress products to prestashop store.",
+  "name": "Huawei Importer",
+  "short_name" : "Huawei Importer",
+  "description": " Huawei Importer.",
   "version": "1.3.1",
   "browser_action": {
     "default_icon": "images/apixpress124x124.png",
     "default_popup": "popup.html",
-    "default_title": ""
+    "default_title": "huawei dev filler"
   },
   "permissions": [
     "tabs",
@@ -17,7 +17,7 @@
     "https://*/*",
     "https://*/",
     "activeTab",
-    "storage"
+    "storage","<all_urls>"
   ],
   "icons": {
     "128": "images/apixpress124x124.png"
@@ -27,13 +27,20 @@
       "matches": [
         "<all_urls>"
       ],
-      "all_frames": false,
+      "all_frames": true,
       "js": [
-        "js/jquery-3.2.1.min.js",
+        "js/jquery-3.4.1.min.js",
         "js/apiexpress_content.js"
       ]
     }
   ],
   "web_accessible_resources" : ["/js/injectScript.js"],
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "matches": ["*://*.chrome.com/*","*://developer.chrome/*","*://developer.huawei.com/*"]
+  },
+  "background": {
+    "scripts": ["/js/background.js"],
+    "persistent": false
+  }
 }

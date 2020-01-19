@@ -1,304 +1,326 @@
-(function () {
-    /*
-     * MAIN
-     **/
 
-    var init = {
+  var name = localStorage.getItem('name');
+  var desc = localStorage.getItem('desc');
+  var brief = localStorage.getItem('brief');
+$("#inputName").val(name)
+  $("#inputIntroduction").val(desc)
+  $("#inputBriefIntroduction").val(brief)
 
-        checkAuth: function (callback) {
-            var authPageId = localStorage.getItem("$ApiExpressExt.authentificated");
-            chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, {data: 'checkPageType', tabId: tabs[0].id}, function (response) {
-                    $('.menu-container .card').hide();
-                    $('.menu-container .advanced-card').hide();
-                    $('.menu-container .infoBull').hide();
-                    $('.menu-container .authentificate').hide();
-                    console.log("XXXXXXXXXX response")
+  $( "#inputName" ).change(function() {
+    var selected = $("#inputName", this);
+    var valueSelected = this.value;
+    console.log(valueSelected)
+    localStorage.setItem('name',valueSelected);
+  });
 
-                    if(response){
-                      console.log("There is a response")
-                    }else {
-                        console.log("there is no response")
-                    }
+  
+  $( "#inputIntroduction" ).change(function() {
+    var selected = $("#inputIntroduction", this);
+    var valueSelected = this.value;
+    console.log(valueSelected)
+    localStorage.setItem('desc',valueSelected);
+  });
 
-                    if (response && response.error) {
-                        console.log(" response error : ")
+  
+  $( "#inputBriefIntroduction" ).change(function() {
+    var selected = $("#inputBriefIntroduction", this);
+    var valueSelected = this.value;
+    console.log(valueSelected)
+    localStorage.setItem('brief',valueSelected);
+  });
 
-                        if (authPageId) {
-                            $('.menu-container .card').hide();
-                            $('.menu-container .advanced-card').hide();
-                            $('.infoBull').addClass('alert-danger');
-                            $('.infoBull img.product-img').hide();
-                            $('.menu-container .infoBull .description').html(response.data.errorMsg);
-                            $('.menu-container .infoBull').show();
-                        } else {
-                            $('.menu-container .authentificate').show();
-                            $('.menu-container .error-auth').show();
-                            $('.menu-container .auth-succ').hide();
-                        }
-                        return true;
-                    }
-                    if (response && response.type === 'aliexpress_page') {
-                      console.log(" response aliexpress_page : hide menu-container authentificate")
-                        $('.menu-container .authentificate').hide();
-                        callback(tabs[0].id);
-                    } else if (response && response.type === 'module_page') {
-                      console.log(" response module_page : hide menu-container authentificate")
-
-                        localStorage.setItem("$ApiExpressExt.authentificated", tabs[0].id);
-                        $('.menu-container .authentificate').show();
-                        $('.menu-container .error-auth').hide();
-                        $('.menu-container .auth-succ').show();
-                    } else {
-                      //console.log(" response else : hide menu-container authentificate")
-
-                        $('.menu-container .card').hide();
-                        $('.menu-container .advanced-card').hide();
-                        $('.infoBull img').attr('src', './images/error-icon.png');
-
-                        $('.menu-container .infoBull').show();
-                    }
-                });
-            });
-        },
-        prepareProduct: function (tabId) {
-            var authPageId = parseInt(localStorage.getItem("$ApiExpressExt.authentificated"));
-            console.log(authPageId)
-            var callback =  function (response) {
-                if (!response.error) {
-                  console.log(response.data)
-
-                  /*
-                    chrome.tabs.sendMessage(authPageId,  {
-                        data: 'getBackendUrl'
-                    }, function (response) {
-                        $M.common.getCategoriesList();
-                    });
-                    chrome.tabs.sendMessage(authPageId, {
-                        data: 'checkProductIfExist',
-                        productId: response.data.productId
-                    }, function (response) {
-                        console.log('checkProductIfExist', response);
-                    });
-
-                    */
-                    $('.cover img').attr('src', response.data.imgUrl);
-                    $('#inputTitle').val(response.data.title);
-                    if(isNaN(response.data.shippingCost)){
-                        $('#inputShippingCost').val(0);
-                    }else{
-                        $('#inputShippingCost').val(response.data.shippingCost);
-                    }
-                    $('#inputPrice').val(response.data.price);
-                    $('#inoputTitle').val(response.data.title);
-                    $('#inputReference').val(response.data.productId);
-                    $('#inputQuantity').val(response.data.quantity);
-                    $('.menu-container .card').show();
-                } else {
-                    $('.menu-container .card').hide();
-                    $('.menu-container .advanced-card').hide();
-                    $('.infoBull img').attr('src', './images/error-icon.png');
-                    $('.menu-container .infoBull .description').html(response.data.errorMsg);
-                    $('.menu-container .infoBull').show();
-                }
-            };
-            chrome.tabs.sendMessage(tabId, {data: 'toSet'}, callback);
-
-
-
-
-        },
-        importProduct: function () {
-            var authPageId = parseInt(localStorage.getItem("$ApiExpressExt.authentificated"));
-            $('.footer').hide();
-            $('.import-loading').show();
-
-
-            chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-
-
-              /*  chrome.tabs.sendMessage(tabs[0].id, {
-                    data: 'toImport',
-                    authPageId: authPageId
-                }, function (productToImport) {
-                  */
-                  var productToImport = {data : {}}
-                    //productToImport.data.imageUrl = $('.cover img').attr('src');
-                    productToImport.data.active = $('#active_on').is(':checked');
-                    productToImport.data.price = parseFloat($('#inputPrice').val());
-                    productToImport.data.quantity = $('#inputQuantity').val();
-                    productToImport.data.title =  $('#inputTitle').val();
-                    //productToImport.data.name =  productToImport.data.name.replace(/( )/g, " ").slice(0, 110);
-                    productToImport.data.shippingCost = $('#inputShippingCost').val();
-                    productToImport.data.id_category = $('#inputCategoryId').val();
-                    productToImport.shopurl = $('#shopurl').val();
-
-
-                    if(!$('#description_on').is(':checked')){
-                        productToImport.data.detailDescriptionUrl = false;
-                    }
-                    console.log("Product " )
-                    console.log(productToImport)
-
-                    var currentImport = JSON.stringify(productToImport.data);
-                    localStorage.setItem("$ApiExpressExt.currentImport", currentImport);
-
-                    $.ajax({
-    url: "http://127.0.0.1:8080/prestashop_1.7.2.4/restapimodule/login",
-    type: 'POST',
-
-    data: {
-        ajax: true,
-        action: 'checkProductIfExist',
-	      product: currentImport,
-        shopurl: productToImport.shopurl
-    },
-    success: function (data) {
-        console.log(data);
-    },
-    fail: function () {
-      console.log("failled");
+var supportedLanguage={
+    
+    'Afrikaans': 'af',
+    'Albanian': 'sq',
+    'Amharic': 'am',
+    'Arabic': 'ar',
+    'Armenian' :'hy',
+    'Azerbaijani' :'az',
+    'Basque': 'eu',
+    'Belarusian': 'be',
+    'Bengali': 'bn',
+    'Bosnian': 'bs',
+    'Bulgarian': 'bg',
+    'Catalan': 'ca',
+    'Cebuano': 'ceb'  ,
+    'Chinese (Simplified)': 'zh-CN'  ,
+    'Chinese (Traditional)': 'zh-TW'  ,
+    'Corsican': 'co',
+    'Croatian': 'hr',
+    'Czech': 'cs',
+    'Danish': 'da',
+    'Dutch': 'nl',
+    'English': 'en',
+    'Esperanto': 'eo',
+    'Estonian': 'et',
+    'Finnish': 'fi',
+    'French': 'fr',
+    'Frisian': 'fy',
+    'Galician': 'gl',
+    'Georgian' :'ka',
+    'German': 'de',
+    'Greek': 'el',
+    'Gujarati' :'gu',
+    'Haitian Creole':  'ht',
+    'Hausa': 'ha',
+    'Hawaiian': 'haw' ,
+    'Hebrew': 'he',
+    'Hindi': 'hi',
+    'Hmong': 'hmn' ,
+    'Hungarian': 'hu',
+    'Icelandic' :'is',
+    'Igbo': 'ig',
+    'Indonesian': 'id',
+    'Irish': 'ga',
+    'Italian': 'it',
+    'Japanese': 'ja',
+    'Javanese': 'jw',
+    'Kannada': 'kn',
+    'Kazakh': 'kk',
+    'Khmer': 'km',
+    'Korean': 'ko',
+    'Kurdish': 'ku',
+    'Kyrgyz': 'ky',
+    'Lao': 'lo',
+    'Latin': 'la',
+    'Latvian': 'lv',
+    'Lithuanian': 'lt',
+    'Luxembourgish': 'lb',
+    'Macedonian': 'mk',
+    'Malagasy': 'mg',
+    'Malay': 'ms',
+    'Malayalam': 'ml',
+    'Maltese': 'mt',
+    'Maori': 'mi',
+    'Marathi': 'mr',
+    'Mongolian': 'mn',
+    'Myanmar (Burmese)': 'my',
+    'Nepali': 'ne',
+    'Norwegian': 'no',
+    'Nyanja (Chichewa)':  'ny',
+    'Pashto': 'ps',
+    'Persian': 'fa',
+    'Polish': 'pl',
+    'Portuguese (Brazil)':  'pt',
+    'Punjabi': 'pa',
+    'Romanian': 'ro',
+    'Russian': 'ru',
+    'Samoan': 'sm',
+    'Scots Gaelic':  'gd',
+    'Serbian': 'sr',
+    'Sesotho': 'st',
+    'Shona': 'sn',
+    'Sindhi': 'sd',
+    'Sinhala':  'si',
+    'Slovak': 'sk',
+    'Slovenian': 'sl',
+    'Somali': 'so',
+    'Spanish': 'es',
+    'Sundanese': 'su',
+    'Swahili': 'sw',
+    'Swedish': 'sv',
+    'Tagalog (Filipino)':  'tl',
+    'Tajik': 'tg',
+    'Tamil': 'ta',
+    'Telugu': 'te',
+    'Thai': 'th',
+    'Turkish': 'tr',
+    'Ukrainian': 'uk',
+    'Urdu': 'ur',
+    'Uzbek': 'uz',
+    'Vietnamese': 'vi',
+    'Welsh': 'cy', 
+    'Xhosa': 'xh',
+    'Yiddish': 'yi',
+    'Yoruba': 'yo',
+    'Zulu': 'zu',
+    
     }
-});
-
-
-                    chrome.tabs.sendMessage(tabs[0].id, {
-                        data: 'print',
-                        product: currentImport,
-                        shopurl: productToImport.shopurl
-                    }, function (response) {
-                        console.log(response);
-                    });
-
-                    /*  chrome.tabs.get(authPageId, function (tab) {
-                     chrome.windows.get(tab.windowId, function (win) {
-                     win.$M.common.insertProductDb(request.product, {}, function () {
-                     console.log('prooooduct inserted');
-                     });
-                     });
-                     });*/
-                    console.log('success');
-              //  });
-            });
-        },
-        getCategoriesList: function (event, parentCategory) {
-            if (parentCategory && parentCategory.id_category) {
-                $('#inputCategoryId').val(parentCategory.id_category);
-            }
-
-            $.ajax({
-                url: window.ajax_php_request,
-                type: 'POST',
-                timeout: 10000,
-                data: {
-                    ajax: true,
-                    action: 'GetCategories',
-                    parentCategoryId: parentCategory && parentCategory.id_category ? parentCategory.id_category : null
-                },
-                success: function (data) {
-                    if (data) {
-                        data = JSON.parse(data);
-                        if (!data.failure) {
-                            if (data.length > 0) {
-                                window.categoriesListParent.push(data);
-                                $('.back-cat-btn').show();
-                                $('#treeCategories').treeview({
-                                    data: data,
-                                    onNodeSelected: $M.common.getCategoriesList,
-                                    enableLinks: true
-                                });
-                            }
-                        } else {
-                            console.log({type: 'getCategoriesList', error: true});
-                        }
-                    } else {
-                        console.log({type: 'getCategoriesList', error: true});
-                    }
-                },
-                fail: function () {
-                    console.log({type: 'getCategoriesList', error: true});
-                }
-            });
-
-        },
-        backToParent: function () {
-            if (window.categoriesListParent.length > 1) {
-                window.categoriesListParent.splice(-1, 1);
-                if (window.categoriesListParent.length - 1 === 0) {
-                    $('.back-cat-btn').hide();
-                }
-            }
-            $('#treeCategories').treeview({
-                data: window.categoriesListParent[window.categoriesListParent.length - 1],
-                onNodeSelected: $M.common.getCategoriesList,
-                enableLinks: true
-            });
+    var supportedLanguage2={
+        'Amharic': 'am',
+        'Arabic': 'ar',
+        'Basque': 'eu',
+        'Bulgarian': 'bg',
+        'Catalan': 'ca',
+        'Chinese (PRC)': 'zh-CN'  ,
+        'Croatian': 'hr',
+        'Czech': 'cs',
+        'Danish': 'da',
+        'Dutch': 'nl',
+        'Estonian': 'et',
+        'Filipino':  'tl',
+        'Finnish': 'fi',
+        'French': 'fr',
+        'Galician': 'gl',
+        'Georgian' :'ka',
+        'German': 'de',
+        'Greek': 'el',
+        'Gujarati' :'gu',
+        'Hebrew': 'he',
+        'Hindi': 'hi',
+        'Hungarian': 'hu',
+        'Indonesian': 'id',
+        'Japanese': 'ja',
+        'Javanese': 'jw',
+        'Kannada': 'kn',
+        'Kazakh': 'kk',
+        'Khmer': 'km',
+        'Korean (South Korea)': 'ko',
+        'Lao': 'lo',
+        'Latvian': 'lv',
+        'Lithuanian': 'lt',
+        'Macedonian': 'mk',
+        'Malay': 'ms',
+        'Malayalam': 'ml',
+        'Maori': 'mi',
+        'Marathi': 'mr',
+        'Mongolian Cyrillic': 'mn',
+        'Nepali': 'ne',
+        'Norwegian': 'no',
+        'Persian': 'fa',
+        'Polish': 'pl',
+        'Portuguese (Brazil)':  'pt',
+        'Punjabi': 'pa',
+        'Romanian': 'ro',
+        'Russian': 'ru',
+        'Serbian': 'sr',
+        'Sinhala':  'si',
+        'Slovak': 'sk',
+        'Slovenian': 'sl',
+        'Spanish (Latin America)': 'es',
+        'Spanish (Spain)': 'es',
+        'Swedish': 'sv',
+        'Tamil': 'ta',
+        'Telugu': 'te',
+        'Thai': 'th',
+        'Traditional Chinese (Taiwan, China)':'zh-TW',
+        'Traditional Chinese (Hong Kong, China)':'zh-TW',
+        'Turkish': 'tr',
+        'Vietnamese': 'vi',
+        'Ukrainian': 'uk',
+        'Urdu': 'ur',
+        'Uzbek': 'uz',
+        
         }
-
-    };
-
-
-    if (typeof $M === 'undefined') {
-        $M = {};
-    }
-
-    $M.common = init;
-})();
-
-window.categoriesListParent = [];
-
+    
 $(document).ready(function () {
-    $M.common.checkAuth($M.common.prepareProduct);
-    $('.btn-import, .btn-updateImport').on('click', function () {
-        $M.common.importProduct();
-    });
 
-    $('.btn-advanced').on('click', function () {
-        $('.card').hide();
-        $('.btn-advanced').hide();
-        $('.back-to-card').show();
-        $('.advanced-card').show();
-    });
-    $('.back-to-card').on('click', function () {
-        $('.card').show();
-        $('.btn-advanced').show();
-        $('.back-to-card').hide();
-        $('.advanced-card').hide();
-    });
-    $('.back-cat-btn').on('click', function () {
-        $M.common.backToParent()
-    });
 
-    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-        console.log("something happening in the page script", request);
-        $('.import-loading').hide();
-        if (request.type == 'succeful-import') {
-            console.log('sendprouct', request.data);
-            $('.menu-container .card').hide();
-            $('.menu-container .advanced-card').hide();
-            $('.infoBull img.product-img').attr('src', $('.card .cover img').attr('src'));
-            $('.infoBull img.success-img').show();
-            $('.infoBull').addClass('succ-import');
-            var msg = 'product inserted succeffuly';
-            if (!$('.btn-updateImport').hasClass('hidden')) {
-                msg = 'product updated succeffuly';
-            }
-            $('.menu-container .infoBull .description').html(msg);
-            $('.menu-container .infoBull').show();
-        }
-        if (request.type == 'checkProductIfExist') {
-            if (!request.error) {
-                $('.btn-updateImport').removeClass('hidden');
-                $('.btn-import').addClass('hidden');
-            } else {
-                $('.btn-import').removeClass('hidden');
-                $('.btn-updateImport').addClass('hidden');
+    function translate(text,targetLang){
+        var settings = {
+            "async": false,
+            "crossDomain": true,
+            "url": "https://google-translate1.p.rapidapi.com/language/translate/v2",
+            "method": "POST",
+            "headers": {
+                "x-rapidapi-host": "google-translate1.p.rapidapi.com",
+                "x-rapidapi-key": "407e38fc61msh9aa66a9888202ecp1eb0f4jsn21e3b5654c7a",
+                "content-type": "application/x-www-form-urlencoded"
+            },
+            "data": {
+                "source": "en",
+                "q": text,
+                "target": targetLang
             }
         }
+        
+        return res =  $.ajax(settings).responseJSON.data.translations[0].translatedText
+    }
 
-        if (request.type == 'getBackendUrl') {
-            window.ajax_php_request = request.url;
-        }
-        sendResponse();
+
+
+    $('#btnImport').on('click', function () {
+
+        var lang=$("#inputSupported").val()
+        var message = {intent: "import", 
+        name: translate($("#inputName")[0].value,lang),
+        description:translate($("#inputIntroduction")[0].value,lang),
+        brief:translate($("#inputBriefIntroduction")[0].value,lang)
+    }
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+              console.log(response);
+            });
+          });
+
     });
+
+
+
+    $('#inject').on('click', function () {
+        var message = {intent: "inject"
+    }
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+              console.log(response);
+            });
+          });
+
+    })
+
+    
+    $('#getlang').on('click', function () {
+        var message = {intent: "getlang"
+    }
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+              console.log(response);
+              $("#inputLang").val(response)
+              $("#inputSupported").val(supportedLanguage2[response])
+
+            });
+          });
+
+    })
+
 });
+
+
+// var port = chrome.tabs.connect({name: "knockknock"});
+// port.postMessage({joke: "Knock knock"});
+// port.onMessage.addListener(function(msg) {
+//   if (msg.question == "Who's there?")
+//     port.postMessage({answer: "Madame"});
+//   else if (msg.question == "Madame who?")
+//     port.postMessage({answer: "Madame... Bovary"});
+// });
+
+
+// chrome.runtime.onMessageExternal.addListener(
+//     function(request, sender, sendResponse) {
+//         console.log(request);
+//         console.log(sender);
+//         console.log("RECEIVE EXTERNAL")
+
+//         var message = {intent: "inject"
+//     }
+//         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+//             chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+//               console.log(response);
+//             });
+//           });
+     
+//     });
+
+ 
+// chrome.runtime.onMessage.addListener(
+//     function(request, sender, sendResponse) {
+//       console.log(sender.tab ?
+//                   "from a content script:" + sender.tab.url :
+//                   "from the extension");
+//       if (request.greeting == "hello")
+//         sendResponse({farewell: "goodbye"});
+//     });
+
+//     chrome.runtime.onConnect.addListener(function(port) {
+//         console.assert(port.name == "knockknock");
+//         port.onMessage.addListener(function(msg) {
+//           if (msg.joke == "Knock knock")
+//             port.postMessage({question: "Who's there?"});
+//           else if (msg.answer == "Madame")
+//             port.postMessage({question: "Madame who?"});
+//           else if (msg.answer == "Madame... Bovary")
+//             port.postMessage({question: "I don't get it."});
+//         });
+//       });

@@ -1,3 +1,5 @@
-localStorage.setItem("aliexpressdata", JSON.stringify(window.runParams));
-localStorage.setItem("skuAttrIds", JSON.stringify(window.skuAttrIds));
-localStorage.setItem("skuProducts", JSON.stringify(window.skuProducts));
+// var data = { type: "FROM_PAGE", text: $('#AppInfoAppNameInputBox').val };
+// var data = { type: "FROM_PAGE", text: "Hello from the webpage! :"+document.getElementById('AppInfoAppNameInputBox') };
+
+// window.postMessage(data, "*");
+console.log(document);
