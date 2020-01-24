@@ -150,6 +150,8 @@ var supportedLanguage2 = {
   'Danish': 'da',
   'Dutch': 'nl',
   'Estonian': 'et',
+  'English (US)': 'en',
+  'English (UK)': 'en',
   'Filipino': 'tl',
   'Finnish': 'fi',
   'French': 'fr',
@@ -251,21 +253,39 @@ $(document).ready(function () {
 
   });
 
-  $('#selectLang').on('click', function () {
-    document.getElementById("AppInfoManageLanguageButton").click();
-    var langBtn = $('.ngdialog div.dialog-content.pt-2 .list-container label')
+  $('#nextlang').on('click', function () {
 
-    langBtn.each((id, element) => {
-      console.log(element.innerText);
-      if (element.innerText in supportedLanguage) {
-        $(element).click()
-      }
+    var message = {
+      intent: "nextlang"
+    }
+    chrome.tabs.query({
+      active: true,
+      currentWindow: true
+    }, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
+        console.log(response);
+      });
     });
 
+  });
 
-    $('.ngdialog .dialog-footer .btn-primary').click()
+  $('#selectLang').on('click', function () {
 
 
+
+
+    var message = {
+      intent: "selectSupportedLang",
+      lang: supportedLanguage2
+    }
+    chrome.tabs.query({
+      active: true,
+      currentWindow: true
+    }, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
+        console.log(response);
+      });
+    });
 
   });
 
