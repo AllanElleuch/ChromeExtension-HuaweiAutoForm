@@ -231,9 +231,7 @@ $(document).ready(function () {
     return res = $.ajax(settings).responseJSON.data.translations[0].translatedText
   }
 
-
-
-  $('#btnImport').on('click', function () {
+  function popupToForm() {
 
     var lang = $("#inputSupported").val()
     var message = {
@@ -248,12 +246,13 @@ $(document).ready(function () {
     }, function (tabs) {
       chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
         console.log(response);
+        return response
       });
     });
 
-  });
+  }
 
-  $('#nextlang').on('click', function () {
+  function nextLang() {
 
     var message = {
       intent: "nextlang"
@@ -264,16 +263,14 @@ $(document).ready(function () {
     }, function (tabs) {
       chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
         console.log(response);
+        return response
+
       });
     });
 
-  });
+  }
 
-  $('#selectLang').on('click', function () {
-
-
-
-
+  function selectSupportedLang() {
     var message = {
       intent: "selectSupportedLang",
       lang: supportedLanguage2
@@ -284,10 +281,18 @@ $(document).ready(function () {
     }, function (tabs) {
       chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
         console.log(response);
+        return response
+
       });
     });
 
-  });
+  }
+
+  $('#btnImport').on('click', popupToForm);
+
+  $('#nextlang').on('click', nextLang);
+
+  $('#selectLang').on('click', selectSupportedLang);
 
   $('#inject').on('click', function () {
     var message = {
@@ -304,7 +309,21 @@ $(document).ready(function () {
 
   })
 
+  $('#translateAll').on('click', function () {
+    var message = {
+      intent: "translateAll"
+    }
+    chrome.tabs.query({
+      active: true,
+      currentWindow: true
+    }, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
+        console.log(response);
+      });
+    });
 
+
+  })
   $('#getlang').on('click', function () {
     var message = {
       intent: "getlang"
@@ -317,10 +336,8 @@ $(document).ready(function () {
         console.log(response);
         $("#inputLang").val(response)
         $("#inputSupported").val(supportedLanguage2[response])
-
       });
     });
-
   })
 
 });

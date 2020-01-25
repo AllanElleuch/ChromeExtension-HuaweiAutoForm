@@ -1,3 +1,27 @@
+document.getElementById("AppInfoManageLanguageButton").click();
+var langBtn = $('.ngdialog div.dialog-content.pt-2 .list-container label')
+
+langBtn.each((id, element) => {
+    console.log(element.innerText);
+    if (element.innerText in supportedLanguage) {
+        $(element).click()
+    }
+});
+
+
+$('.ngdialog .dialog-footer .btn-primary').click()
+$('.btn.btn-default.form-control.ui-select-toggle')[0].click()
+$('.ui-select-bootstrap .ui-select-choices-row.active>span').parent().next().click()
+
+
+
+
+
+
+
+
+
+
 var listLanguage = $('[id="testst"] ul.ui-select-choices li')[0]
 
 
@@ -5,58 +29,59 @@ for (var i = 0; i < listLanguage.children.length; i++) {
     // console.log(listLanguage.children[i])
     var lang = $(listLanguage.children[i]).find('span div:first-child div:first-child')[0]
     console.log(lang)
-    if(lang){
+    if (lang) {
         console.log(lang.innerText)
 
     }
 }
 
 
-import function (params) {
-$("#AppInfoAppNameInputBox").val("name");
-$("#AppInfoAppIntroduceInputBox").val("name");
-$("#AppInfoAppBriefInputBox").val("name");
+import
+function (params) {
+    $("#AppInfoAppNameInputBox").val("name");
+    $("#AppInfoAppIntroduceInputBox").val("name");
+    $("#AppInfoAppBriefInputBox").val("name");
 }
 
 
 function getElementByXpath(path) {
     return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    }
+}
 
-    getElementByXpath("/html/body/div/div/div/div/div/div/div[4]/div[2]")
-    var l = $( getElementByXpath("/html/body/div/div/div/div/div/div/div[4]/div[1]/div[2]"))
+getElementByXpath("/html/body/div/div/div/div/div/div/div[4]/div[2]")
+var l = $(getElementByXpath("/html/body/div/div/div/div/div/div/div[4]/div[1]/div[2]"))
 
-    l.children()[7].firstElementChild.className ="ucd-check ucd-check-checkbox ucd-checked"
+l.children()[7].firstElementChild.className = "ucd-check ucd-check-checkbox ucd-checked"
 //*[@id="testst"]/div[4]/div[3]/div[1]/div/div/div[2]/div[1]/div/div/div[1]/span/span[2]
 
 
-faire en sorte qu'on peut importer 
+faire en sorte qu 'on peut importer 
 
 faire en sorte que ca traduit en anglais
 
 faire en sorte que ca traduit en selectionnant une listLanguage
 
-faire scroller sur toute al list 
+faire scroller sur toute al list
 
 
 
-var supportedLanguage={
-    
+var supportedLanguage = {
+
     'Afrikaans': 'af',
     'Albanian': 'sq',
     'Amharic': 'am',
     'Arabic': 'ar',
-    'Armenian' :'hy',
-    'Azerbaijani' :'az',
+    'Armenian': 'hy',
+    'Azerbaijani': 'az',
     'Basque': 'eu',
     'Belarusian': 'be',
     'Bengali': 'bn',
     'Bosnian': 'bs',
     'Bulgarian': 'bg',
     'Catalan': 'ca',
-    'Cebuano': 'ceb'  ,
-    'Chinese (Simplified)': 'zh-CN'  ,
-    'Chinese (Traditional)': 'zh-TW'  ,
+    'Cebuano': 'ceb',
+    'Chinese (Simplified)': 'zh-CN',
+    'Chinese (Traditional)': 'zh-TW',
     'Corsican': 'co',
     'Croatian': 'hr',
     'Czech': 'cs',
@@ -69,18 +94,18 @@ var supportedLanguage={
     'French': 'fr',
     'Frisian': 'fy',
     'Galician': 'gl',
-    'Georgian' :'ka',
+    'Georgian': 'ka',
     'German': 'de',
     'Greek': 'el',
-    'Gujarati' :'gu',
-    'Haitian Creole':  'ht',
+    'Gujarati': 'gu',
+    'Haitian Creole': 'ht',
     'Hausa': 'ha',
-    'Hawaiian': 'haw' ,
+    'Hawaiian': 'haw',
     'Hebrew': 'he',
     'Hindi': 'hi',
-    'Hmong': 'hmn' ,
+    'Hmong': 'hmn',
     'Hungarian': 'hu',
-    'Icelandic' :'is',
+    'Icelandic': 'is',
     'Igbo': 'ig',
     'Indonesian': 'id',
     'Irish': 'ga',
@@ -109,21 +134,21 @@ var supportedLanguage={
     'Myanmar (Burmese)': 'my',
     'Nepali': 'ne',
     'Norwegian': 'no',
-    'Nyanja (Chichewa)':  'ny',
+    'Nyanja (Chichewa)': 'ny',
     'Pashto': 'ps',
     'Persian': 'fa',
     'Polish': 'pl',
-    'Portuguese (Brazil)':  'pt',
+    'Portuguese (Brazil)': 'pt',
     'Punjabi': 'pa',
     'Romanian': 'ro',
     'Russian': 'ru',
     'Samoan': 'sm',
-    'Scots Gaelic':  'gd',
+    'Scots Gaelic': 'gd',
     'Serbian': 'sr',
     'Sesotho': 'st',
     'Shona': 'sn',
     'Sindhi': 'sd',
-    'Sinhala':  'si',
+    'Sinhala': 'si',
     'Slovak': 'sk',
     'Slovenian': 'sl',
     'Somali': 'so',
@@ -131,7 +156,7 @@ var supportedLanguage={
     'Sundanese': 'su',
     'Swahili': 'sw',
     'Swedish': 'sv',
-    'Tagalog (Filipino)':  'tl',
+    'Tagalog (Filipino)': 'tl',
     'Tajik': 'tg',
     'Tamil': 'ta',
     'Telugu': 'te',
@@ -141,11 +166,10 @@ var supportedLanguage={
     'Urdu': 'ur',
     'Uzbek': 'uz',
     'Vietnamese': 'vi',
-    'Welsh': 'cy', 
+    'Welsh': 'cy',
     'Xhosa': 'xh',
     'Yiddish': 'yi',
     'Yoruba': 'yo',
     'Zulu': 'zu',
-    
-    }
-    
+
+}

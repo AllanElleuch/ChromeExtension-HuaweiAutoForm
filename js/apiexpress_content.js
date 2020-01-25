@@ -55,8 +55,9 @@ $(document).ready(function () {
 
             if (request.intent == "nextlang") {
                 console.log("START nextlang");
-                $('.btn.btn-default.form-control.ui-select-toggle')[0].click()
-                $('.ui-select-bootstrap .ui-select-choices-row.active>span').parent().next().click()
+                $('.btn.btn-default.form-control.ui-select-toggle')[0].click();
+                $('.ui-select-bootstrap .ui-select-choices-row.active>span').parent().next().click();
+                sendResponse($('.ui-select-bootstrap .ui-select-choices-row.active>span').parent().next().length);
             }
 
             if (request.intent == 'selectSupportedLang') {
