@@ -1,118 +1,165 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Import this Product</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-</head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+  </head>
 
-<body>
+  <body>
     <div class="menu-container">
-        <div class="card">
+      <div class="card">
+        <div class="content">
+          <div class="main">
+            <div class="row col-xs-12">
+              <h4>Get your shit done with huawei</h4>
+            </div>
+            <form class="row">
+              <div class="form-group  col-xs-12">
+                <label for="labelName">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputName"
+                  placeholder="Enter text..."
+                  required=""
+                />
+              </div>
 
-            <div class="content">
-                <div class="main">
-                    <div class="row col-xs-12">
-                        <h4>Get your shit done with huawei</h4>
+              <div class="form-group  col-xs-12">
+                <label for="inputIntroduction">Introduction</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="inputIntroduction"
+                  placeholder="Enter text..."
+                  required=""
+                ></textarea>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="labelBriefIntroduction">Brief introduction</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="inputBriefIntroduction"
+                  placeholder="Enter text..."
+                  required=""
+                ></textarea>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="labelLang">detected language</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputLang"
+                  placeholder="Enter text..."
+                  required=""
+                />
+              </div>
 
-                    </div>
-                    <form class="row">
-
-
-                        <div class="form-group  col-xs-12">
-                            <label for="labelName">Name</label>
-                            <input type="text" class="form-control" id="inputName" placeholder="Enter text..."
-                                required="">
-                        </div>
-
-                        <div class="form-group  col-xs-12">
-                            <label for="inputIntroduction">Introduction</label>
-                            <textarea type="text" class="form-control" id="inputIntroduction"
-                                placeholder="Enter text..." required=""></textarea>
-                        </div>
-                        <div class="form-group col-xs-12">
-                            <label for="labelBriefIntroduction">Brief introduction</label>
-                            <textarea type="text" class="form-control" id="inputBriefIntroduction"
-                                placeholder="Enter text..." required=""></textarea>
-                        </div>
-                        <div class="form-group col-xs-12">
-                            <label for="labelLang">detected language</label>
-                            <input type="text" class="form-control" id="inputLang" placeholder="Enter text..."
-                                required="">
-                        </div>
-
-                        <div class="form-group col-xs-12">
-                            <label for="labelSupported">supported</label>
-                            <input type="text" class="form-control" id="inputSupported" placeholder="Enter text..."
-                                required="">
-                        </div>
-                    </form>
-                </div>
-                <div class="footer">
-                    <div class="links text-center">
-                        <button id="selectLang" class="btn btn-primary btn-warning btn-block btn-import">Select
-                            supported
-                            lang </button>
-                        <button id="nextlang" class="btn btn-primary btn-warning btn-block btn-import">Next lang
-                        </button>
-                        <button id="getlang" class="btn btn-primary btn-warning btn-block btn-updateImport ">get
-                            lang</button>
-                        <button id="btnImport" class="btn btn-primary btn-danger btn-block btn-import">Import all
-                            language</button>
-                        <button id="translateAll" class="btn btn-primary btn-danger btn-block btn-import">Do
-                            All</button>
-                        <!-- <button class="btn btn-primary btn-danger btn-block btn-updateImport " disabled>Translate All
+              <div class="form-group col-xs-12">
+                <label for="labelSupported">supported</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputSupported"
+                  placeholder="Enter text..."
+                  required=""
+                />
+              </div>
+            </form>
+          </div>
+          <div class="footer">
+            <div class="links text-center">
+              <button
+                id="selectLang"
+                class="btn btn-primary btn-warning btn-block btn-import"
+              >
+                Select supported lang
+              </button>
+              <button
+                id="nextlang"
+                class="btn btn-primary btn-warning btn-block btn-import"
+              >
+                Next lang
+              </button>
+              <button
+                id="getlang"
+                class="btn btn-primary btn-warning btn-block btn-updateImport "
+              >
+                get lang
+              </button>
+              <button
+                id="btnImport"
+                class="btn btn-primary btn-danger btn-block btn-import"
+              >
+                Import all language
+              </button>
+              <button
+                id="translateAll"
+                class="btn btn-primary btn-danger btn-block btn-import"
+              >
+                Do All
+              </button>
+              <!-- <button class="btn btn-primary btn-danger btn-block btn-updateImport " disabled>Translate All
                             Language</button>
                         <button id="inject" class="btn btn-primary btn-danger btn-block btn-updateImport "
                             disabled>inject</button> -->
-
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="advanced-card" style="display: none">
+        <div class="content">
+          <div class="main">
+            <form class="row">
+              <div class="form-group  col-xs-12">
+                <label for="inputTitle">Title</label>
+                <textarea
+                  class="form-control"
+                  id="inputTitle"
+                  placeholder="Enter Title..."
+                  required=""
+                ></textarea>
+              </div>
+              <div class="form-group  col-xs-12">
+                <label for="inputShippingCost">Shipping Cost</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputShippingCost"
+                  placeholder="Enter Shipping cost..."
+                  required=""
+                />
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="inputQuantity">category</label>
+                <input type="text" class="" id="inputCategoryId" />
+                <div class="form-group">
+                  <div class="treecategories-cnt">
+                    <div id="treeCategories"></div>
+                    <div class="categories-list-menu" style="display: block">
+                      <button
+                        type="button"
+                        class="back-cat-btn btn-xs btn-primary"
+                        style="display: none"
+                      >
+                        <i class="glyphicon glyphicon-arrow-left"></i>
+                      </button>
                     </div>
+                  </div>
                 </div>
-            </div>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="advanced-card" style="display: none">
-            <div class="content">
-                <div class="main">
-                    <form class="row">
-                        <div class="form-group  col-xs-12">
-                            <label for="inputTitle">Title</label>
-                            <textarea class="form-control" id="inputTitle" placeholder="Enter Title..."
-                                required=""></textarea>
-                        </div>
-                        <div class="form-group  col-xs-12">
-                            <label for="inputShippingCost">Shipping Cost</label>
-                            <input type="text" class="form-control" id="inputShippingCost"
-                                placeholder="Enter Shipping cost..." required="">
-                        </div>
-                        <div class="form-group col-xs-12">
-                            <label for="inputQuantity">category</label>
-                            <input type="text" class="" id="inputCategoryId" />
-                            <div class="form-group">
-                                <div class="treecategories-cnt">
-                                    <div id="treeCategories"></div>
-                                    <div class="categories-list-menu" style="display: block">
-                                        <button type="button" class="back-cat-btn btn-xs btn-primary"
-                                            style="display: none">
-                                            <i class="glyphicon glyphicon-arrow-left"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-
+      </div>
     </div>
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bs-treeview.min.js"></script>
     <script src="/js/app.js"></script>
-</body>
-
+  </body>
 </html>
