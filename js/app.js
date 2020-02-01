@@ -5,21 +5,21 @@ $("#inputName").val(name);
 $("#inputIntroduction").val(desc);
 $("#inputBriefIntroduction").val(brief);
 
-$("#inputName").change(function() {
+$("#inputName").change(function () {
   var selected = $("#inputName", this);
   var valueSelected = this.value;
   console.log(valueSelected);
   localStorage.setItem("name", valueSelected);
 });
 
-$("#inputIntroduction").change(function() {
+$("#inputIntroduction").change(function () {
   var selected = $("#inputIntroduction", this);
   var valueSelected = this.value;
   console.log(valueSelected);
   localStorage.setItem("desc", valueSelected);
 });
 
-$("#inputBriefIntroduction").change(function() {
+$("#inputBriefIntroduction").change(function () {
   var selected = $("#inputBriefIntroduction", this);
   var valueSelected = this.value;
   console.log(valueSelected);
@@ -209,7 +209,7 @@ var supportedLanguage2 = {
   Uzbek: "uz"
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
   function translate(text, targetLang) {
     var settings = {
       async: false,
@@ -227,13 +227,17 @@ $(document).ready(function() {
         target: targetLang
       }
     };
-
-    return (res = $.ajax(settings).responseJSON.data.translations[0]
-      .translatedText);
+    data = $.ajax(settings).responseJSON.data
+    if (data) {
+      return data.translations[0]
+        .translatedText
+    } else {
+      return text
+    }
   }
 
   function popupToForm() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var lang = $("#inputSupported").val();
       var message = {
         intent: "import",
@@ -241,13 +245,12 @@ $(document).ready(function() {
         description: translate($("#inputIntroduction")[0].value, lang),
         brief: translate($("#inputBriefIntroduction")[0].value, lang)
       };
-      chrome.tabs.query(
-        {
+      chrome.tabs.query({
           active: true,
           currentWindow: true
         },
-        function(tabs) {
-          chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+        function (tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
             console.log(`popupToForm resolving : ${response}`);
             resolve(response);
           });
@@ -257,17 +260,16 @@ $(document).ready(function() {
   }
 
   function nextLang() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var message = {
         intent: "nextlang"
       };
-      chrome.tabs.query(
-        {
+      chrome.tabs.query({
           active: true,
           currentWindow: true
         },
-        function(tabs) {
-          chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+        function (tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
             console.log(`nextLang getting : ${response}`);
             resolve(response);
           });
@@ -277,18 +279,17 @@ $(document).ready(function() {
   }
 
   function selectSupportedLang() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var message = {
         intent: "selectSupportedLang",
         lang: supportedLanguage2
       };
-      chrome.tabs.query(
-        {
+      chrome.tabs.query({
           active: true,
           currentWindow: true
         },
-        function(tabs) {
-          chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+        function (tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
             console.log(`selectSupportedLang get : ${response}`);
             resolve(response);
           });
@@ -298,17 +299,16 @@ $(document).ready(function() {
   }
 
   function getlang() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var message = {
         intent: "getlang"
       };
-      chrome.tabs.query(
-        {
+      chrome.tabs.query({
           active: true,
           currentWindow: true
         },
-        function(tabs) {
-          chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+        function (tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
             console.log(`getlang get : ${response}`);
             $("#inputLang").val(response);
             $("#inputSupported").val(supportedLanguage2[response]);
@@ -328,24 +328,23 @@ $(document).ready(function() {
 
   $("#selectLang").on("click", selectSupportedLang);
 
-  $("#inject").on("click", function() {
+  $("#inject").on("click", function () {
     var message = {
       intent: "inject"
     };
-    chrome.tabs.query(
-      {
+    chrome.tabs.query({
         active: true,
         currentWindow: true
       },
-      function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+      function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
           console.log(response);
         });
       }
     );
   });
 
-  $("#translateAll").on("click", async function() {
+  $("#translateAll").on("click", async function () {
     // var message = {
     //   intent: "translateAll"
     // }
@@ -385,7 +384,7 @@ $(document).ready(function() {
 
     console.log("translate is over");
   });
-  // $("#getlang").on("click", getlang); // end promisse
+  $("#getlang").on("click", getlang); // end promisse
 });
 
 // var port = chrome.tabs.connect({name: "knockknock"});
