@@ -211,21 +211,42 @@ var supportedLanguage2 = {
 };
 
 $(document).ready(function() {
+  // function translate(text, targetLang) {
+  //   var settings = {
+  //     async: false,
+  //     crossDomain: true,
+  //     url: "https://google-translate1.p.rapidapi.com/language/translate/v2",
+  //     method: "POST",
+  //     headers: {
+  //       "x-rapidapi-host": "google-translate1.p.rapidapi.com",
+  //       "x-rapidapi-key": "407e38fc61msh9aa66a9888202ecp1eb0f4jsn21e3b5654c7a",
+  //       "content-type": "application/x-www-form-urlencoded"
+  //     },
+  //     data: {
+  //       source: "en",
+  //       q: text,
+  //       target: targetLang
+  //     }
+  //   };
+  //   data = $.ajax(settings).responseJSON.data;
+  //   if (data) {
+  //     return data.translations[0].translatedText;
+  //   } else {
+  //     return text;
+  //   }
+  // }
+
   function translate(text, targetLang) {
     var settings = {
       async: false,
       crossDomain: true,
-      url: "https://google-translate1.p.rapidapi.com/language/translate/v2",
+      url: "https://translation.googleapis.com/language/translate/v2",
       method: "POST",
-      headers: {
-        "x-rapidapi-host": "google-translate1.p.rapidapi.com",
-        "x-rapidapi-key": "407e38fc61msh9aa66a9888202ecp1eb0f4jsn21e3b5654c7a",
-        "content-type": "application/x-www-form-urlencoded"
-      },
       data: {
         source: "en",
         q: text,
-        target: targetLang
+        target: targetLang,
+        key: "AIzaSyDMroWMwXy0UutY4OLpSIIAmIO0gNT3eNI"
       }
     };
     data = $.ajax(settings).responseJSON.data;
