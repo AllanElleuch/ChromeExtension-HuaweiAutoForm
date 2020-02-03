@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>Import this Product</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
   </head>
 
   <body>
@@ -18,40 +18,55 @@
             <form class="row">
               <div class="form-group  col-xs-12">
                 <label for="labelName">Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputName"
-                  placeholder="Enter text..."
-                  required=""
-                />
+                <div class="vertical-align-container">
+                  <input
+                    type="text"
+                    class="form-control input"
+                    id="inputName"
+                    maxlength="64"
+                    placeholder="Enter text..."
+                    required=""
+                  />
+                  <span class="input-tips">0/64</span>
+                </div>
               </div>
-
-              <div class="form-group  col-xs-12">
+              <div class="form-group  col-xs-12 ">
                 <label for="inputIntroduction">Introduction</label>
-                <textarea
-                  type="text"
-                  class="form-control"
-                  id="inputIntroduction"
-                  placeholder="Enter text..."
-                  required=""
-                ></textarea>
+                <div class="vertical-align-container">
+                  <textarea
+                    type="text"
+                    class="txt-area input form-control "
+                    id="inputIntroduction"
+                    placeholder="Enter text..."
+                    required=""
+                    maxlength="8000"
+                  ></textarea>
+
+                  <span class="input-tips vertical-child-container"
+                    >0/8000</span
+                  >
+                </div>
               </div>
               <div class="form-group col-xs-12">
                 <label for="labelBriefIntroduction">Brief introduction</label>
-                <textarea
-                  type="text"
-                  class="form-control"
-                  id="inputBriefIntroduction"
-                  placeholder="Enter text..."
-                  required=""
-                ></textarea>
+
+                <div class="vertical-align-container">
+                  <textarea
+                    type="text"
+                    class="form-control input"
+                    id="inputBriefIntroduction"
+                    placeholder="Enter text..."
+                    required=""
+                    maxlength="80"
+                  ></textarea>
+                  <span class="input-tips">0/80</span>
+                </div>
               </div>
               <div class="form-group col-xs-12">
                 <label for="labelLang">detected language</label>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control "
                   id="inputLang"
                   placeholder="Enter text..."
                   required=""
