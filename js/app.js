@@ -1,9 +1,16 @@
 var name = localStorage.getItem("name");
 var desc = localStorage.getItem("desc");
 var brief = localStorage.getItem("brief");
+
 $("#inputName").val(name);
 $("#inputIntroduction").val(desc);
 $("#inputBriefIntroduction").val(brief);
+
+$(document).ready(function() {
+  $("#inputName").trigger("keyup");
+  $("#inputIntroduction").trigger("keyup");
+  $("#inputBriefIntroduction").trigger("keyup");
+});
 
 $("#inputName").change(function() {
   var selected = $("#inputName", this);
