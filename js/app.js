@@ -240,7 +240,11 @@ $(document).ready(function() {
   //     return text;
   //   }
   // }
-
+  var decode = function(str) {
+    return str.replace(/&#(\d+);/g, function(match, dec) {
+      return String.fromCharCode(dec);
+    });
+  };
   function translate(text, targetLang) {
     var settings = {
       async: false,
@@ -255,8 +259,10 @@ $(document).ready(function() {
       }
     };
     data = $.ajax(settings).responseJSON.data;
+    console.log(data);
+
     if (data) {
-      return data.translations[0].translatedText;
+      return decode(data.translations[0].translatedText);
     } else {
       return text;
     }
