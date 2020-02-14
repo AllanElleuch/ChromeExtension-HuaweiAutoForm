@@ -240,32 +240,49 @@ $(document).ready(function() {
   //     return text;
   //   }
   // }
+
+  function translate(text, targetLang) {
+    var settings = {
+      async: false,
+      crossDomain: true,
+      url:
+        "https://script.google.com/macros/s/AKfycbwkoI0O5yPWlkLiCDVd9W-2lgsJvjudJ8tJFiMZBzaXheeX7b9o/exec",
+      method: "GET",
+      data: {
+        source: "en",
+        q: text,
+        target: targetLang
+      }
+    };
+    data = $.ajax(settings).responseJSON;
+    console.log("json");
+    console.log(data);
+    if (data) {
+      console.log("translatedText");
+      console.log(data.translatedText);
+
+      return decodeFormating(decode(data.translatedText));
+    } else {
+      return text;
+    }
+  }
+
   var decode = function(str) {
     return str.replace(/&#(\d+);/g, function(match, dec) {
       return String.fromCharCode(dec);
     });
   };
-  function translate(text, targetLang) {
-    var settings = {
-      async: false,
-      crossDomain: true,
-      url: "https://translation.googleapis.com/language/translate/v2",
-      method: "POST",
-      data: {
-        source: "en",
-        q: text,
-        target: targetLang,
-        key: "AIzaSyDMroWMwXy0UutY4OLpSIIAmIO0gNT3eNI"
-      }
-    };
-    data = $.ajax(settings).responseJSON.data;
-    console.log(data);
 
-    if (data) {
-      return decode(data.translations[0].translatedText);
-    } else {
-      return text;
-    }
+  function encodeFormating(text) {
+    var encodedText = text.replace(/[\n]+/g, "<n>");
+    encodedText = encodedText.replace(/[\r]+/g, "<r>");
+    return encodedText;
+  }
+
+  function decodeFormating(text) {
+    var encodedText = text.replace(/[<n>]+/g, "\n");
+    encodedText = encodedText.replace(/[<r>]+/g, "\r");
+    return encodedText;
   }
 
   function popupToForm() {

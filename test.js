@@ -16,7 +16,28 @@ $('.ui-select-bootstrap .ui-select-choices-row.active>span').parent().next().cli
 
 
 
+function googleTranslate(text, targetLang) {
+    var settings = {
+      async: false,
+      crossDomain: true,
+      url: "https://translation.googleapis.com/language/translate/v2",
+      method: "POST",
+      data: {
+        source: "en",
+        q: text,
+        target: targetLang,
+        key: "AIzaSyDMroWMwXy0UutY4OLpSIIAmIO0gNT3eNI"
+      }
+    };
+    data = $.ajax(settings).responseJSON.data;
+    console.log(data);
 
+    if (data) {
+      return decode(data.translations[0].translatedText);
+    } else {
+      return text;
+    }
+  }
 
 
 
