@@ -1,10 +1,12 @@
 var name = localStorage.getItem("name");
 var desc = localStorage.getItem("desc");
 var brief = localStorage.getItem("brief");
+var sourceLangSelector = localStorage.getItem("sourceLangSelector");
 
 $("#inputName").val(name);
 $("#inputIntroduction").val(desc);
 $("#inputBriefIntroduction").val(brief);
+// $("#sourceLangSelector").val(sourceLangSelector);
 
 $(document).ready(function() {
   $("#inputName").trigger("keyup");
@@ -31,6 +33,13 @@ $("#inputBriefIntroduction").change(function() {
   var valueSelected = this.value;
   console.log(valueSelected);
   localStorage.setItem("brief", valueSelected);
+});
+
+$("#sourceLangSelector").change(function() {
+  var selected = $("#sourceLangSelector");
+  var valueSelected = selected.val();
+  console.log(valueSelected);
+  localStorage.setItem("sourceLangSelector", valueSelected);
 });
 
 var supportedLanguage = {
@@ -221,11 +230,20 @@ $(document).ready(function() {
   $.each(supportedLanguage2, function(key, value) {
     console.log(key);
     console.log(value);
-    optionSourceLang.append(
-      $("<option />")
-        .val(value)
-        .text(key)
-    );
+
+    if (sourceLangSelector == value) {
+      optionSourceLang.append(
+        $('<option  selected="selected" />')
+          .val(value)
+          .text(key)
+      );
+    } else {
+      optionSourceLang.append(
+        $("<option />")
+          .val(value)
+          .text(key)
+      );
+    }
   });
 
   // function translate(text, targetLang) {
@@ -342,6 +360,34 @@ $(document).ready(function() {
     }); // end promisse
   }
 
+  function previousLang() {
+    return new Promise(function(resolve, reject) {
+      var message = {
+        intent: "previouslang"
+      };
+      chrome.tabs.query(
+        {
+          active: true,
+          currentWindow: true
+        },
+        function(tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+            console.log(`nextLang getting : ${response}`);
+            resolve(response);
+          });
+        }
+      );
+    }); // end promisse
+  }
+
+  function getLangAndTranslate() {
+    getlang().then(popupToForm());
+  }
+
+  /**
+   * select all languages supported by the program
+   */
+
   function selectSupportedLang() {
     return new Promise(function(resolve, reject) {
       var message = {
@@ -388,9 +434,10 @@ $(document).ready(function() {
     });
   }
 
-  $("#btnImport").on("click", popupToForm);
+  $("#btnImport").on("click", getLangAndTranslate);
 
   $("#nextlang").on("click", nextLang);
+  $("#previouslang").on("click", previousLang);
 
   $("#selectLang").on("click", selectSupportedLang);
 

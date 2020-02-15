@@ -18,9 +18,9 @@ function getElementByXpath(path) {
   ).singleNodeValue;
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
   if (location.href.includes("appinfo")) {
-    chrome.runtime.onMessage.addListener(function (
+    chrome.runtime.onMessage.addListener(function(
       request,
       sender,
       sendResponse
@@ -40,7 +40,6 @@ $(document).ready(function () {
         $("#AppInfoAppNameInputBox").val(request.name);
         $("#AppInfoAppIntroduceInputBox").val(request.description);
         $("#AppInfoAppBriefInputBox").val(request.brief); //.val("name")
-
 
         var event = new Event("change");
 
@@ -77,8 +76,8 @@ $(document).ready(function () {
         if (btnSelectLang) {
           btnSelectLang.click();
           var isNext = !!$(
-              ".ui-select-bootstrap .ui-select-choices-row.active>span"
-            )
+            ".ui-select-bootstrap .ui-select-choices-row.active>span"
+          )
             .parent()
             .next().length;
           $(".ui-select-bootstrap .ui-select-choices-row.active>span:first")
@@ -86,6 +85,22 @@ $(document).ready(function () {
             .next()
             .click();
           sendResponse(isNext);
+        }
+      }
+
+      if (request.intent == "previouslang") {
+        console.log("START previouslang");
+        var btnSelectLang = $(
+          ".btn.btn-default.form-control.ui-select-toggle:first"
+        );
+        if (btnSelectLang) {
+          btnSelectLang.click();
+
+          $(".ui-select-bootstrap .ui-select-choices-row.active>span:first")
+            .parent()
+            .prev()
+            .click();
+          sendResponse(true);
         }
       }
 
@@ -126,7 +141,7 @@ $(document).ready(function () {
 
     console.log("Script loaded");
 
-    window.addEventListener("message", function (event) {
+    window.addEventListener("message", function(event) {
       this.console.log("event");
       this.console.log(event.data.text);
       // We only accept messages from ourselves
@@ -137,7 +152,7 @@ $(document).ready(function () {
       }
     });
 
-    document.addEventListener("RW759_connectExtension", function (e) {
+    document.addEventListener("RW759_connectExtension", function(e) {
       // e.detail contains the transferred data (can be anything, ranging
       // from JavaScript objects to strings).
       // Do something, for example:
@@ -153,9 +168,9 @@ $(document).ready(function () {
     //     port.postMessage({answer: "Madame... Bovary"});
     // });
 
-    chrome.runtime.onConnect.addListener(function (port) {
+    chrome.runtime.onConnect.addListener(function(port) {
       console.assert(port.name == "knockknock");
-      port.onMessage.addListener(function (msg) {
+      port.onMessage.addListener(function(msg) {
         if (msg.joke == "Knock knock")
           port.postMessage({
             question: "Who's there?"

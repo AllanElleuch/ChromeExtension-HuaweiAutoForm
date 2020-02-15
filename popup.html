@@ -14,14 +14,15 @@
           <div class="main">
             <div class="row col-xs-12">
               <h2>Huawei Translator</h2>
-              <h4>
+              <hr>
+              <h4 class="subTitle">
                 Translate your app description to 105 languages in no time
-              </h4>
+              </h4 >
             </div>
 
             <form class="row">
               <div class="form-group  col-xs-12">
-                <label for="labelSourceLang">Source lang</label>
+                <label for="labelSourceLang">Source lang for description</label>
                 <div class="vertical-align-container">
                   <div class="gtx-language">
                     <select
@@ -80,7 +81,7 @@
                   <span id="spanBriefIntro" class="input-tips">0/80</span>
                 </div>
               </div>
-              <div class="form-group col-xs-12">
+              <div class="form-group col-xs-12 hidden">
                 <label for="labelLang">detected language</label>
                 <input
                   type="text"
@@ -91,7 +92,7 @@
                 />
               </div>
 
-              <div class="form-group col-xs-12">
+              <div class="form-group col-xs-12 hidden">
                 <label for="labelSupported">supported</label>
                 <input
                   type="text"
@@ -103,44 +104,56 @@
               </div>
             </form>
           </div>
-          <div class="footer">
-            <div class="links text-center">
+
+          <div class="main-container">
+            <div class="left-container">
               <button
                 id="selectLang"
-                class="btn btn-primary btn-warning btn-block btn-import"
+                class="btn btn-success  btn-block btn-import"
               >
-                Select supported lang
+                Select languages
               </button>
+
               <button
-                id="nextlang"
-                class="btn btn-primary btn-warning btn-block btn-import"
+                id="btnImport"
+                class="btn btn-success  btn-block btn-import "
               >
-                Next lang
+                translate current 
               </button>
+
+              <button
+                id="translateAll"
+                class="btn btn-success  btn-block btn-import"
+              >
+                Translate all 
+              </button>
+
+       
               <button
                 id="getlang"
-                class="btn btn-primary btn-warning btn-block btn-updateImport "
+                class="btn btn-primary btn-warning btn-block btn-updateImport hidden"
               >
                 get lang
               </button>
-              <button
-                id="btnImport"
-                class="btn btn-primary btn-danger btn-block btn-import"
-              >
-                Import all language
-              </button>
-              <button
-                id="translateAll"
-                class="btn btn-primary btn-danger btn-block btn-import"
-              >
-                Do All
-              </button>
+
+            </div>
+            <div class="right-container">
+              <div id="previouslang" href="#" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-arrow-up"></span> Up
+              </div>
+
+              <div id="nextlang" href="#" class="btn btn-info btn-lg btn-block">
+                <span class="glyphicon glyphicon-arrow-down"></span> Down
+              </div>
+          </div>
+
+              
+
               <!-- <button class="btn btn-primary btn-danger btn-block btn-updateImport " disabled>Translate All
                             Language</button>
                         <button id="inject" class="btn btn-primary btn-danger btn-block btn-updateImport "
                             disabled>inject</button> -->
-            </div>
-          </div>
+    
         </div>
       </div>
       <div class="advanced-card" style="display: none">
