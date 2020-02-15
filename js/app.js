@@ -225,6 +225,13 @@ var supportedLanguage2 = {
 };
 
 $(document).ready(function() {
+  $("#modeSwitch").change(function() {
+    $("#previouslang").toggle();
+    $("#nextlang").toggle();
+    $("#btnImport").toggle();
+  });
+  $("#modeSwitch").trigger("change");
+
   optionSourceLang = $("#sourceLangSelector");
 
   $.each(supportedLanguage2, function(key, value) {
