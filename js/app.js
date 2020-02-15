@@ -216,6 +216,18 @@ var supportedLanguage2 = {
 };
 
 $(document).ready(function() {
+  optionSourceLang = $("#sourceLangSelector");
+
+  $.each(supportedLanguage2, function(key, value) {
+    console.log(key);
+    console.log(value);
+    optionSourceLang.append(
+      $("<option />")
+        .val(value)
+        .text(key)
+    );
+  });
+
   // function translate(text, targetLang) {
   //   var settings = {
   //     async: false,
@@ -249,7 +261,8 @@ $(document).ready(function() {
         "https://script.google.com/macros/s/AKfycbwkoI0O5yPWlkLiCDVd9W-2lgsJvjudJ8tJFiMZBzaXheeX7b9o/exec",
       method: "GET",
       data: {
-        source: "en",
+        // source: "en",
+        source: $("#sourceLangSelector").val(),
         q: text,
         target: targetLang
       }
