@@ -223,6 +223,16 @@ var supportedLanguage2 = {
   Urdu: "ur",
   Uzbek: "uz"
 };
+var freemium = {
+  Arabic: "ar",
+  "English (US)": "en",
+  "English (UK)": "en",
+  Italian: "it",
+  French: "fr",
+  Spanish: "es",
+  "Chinese (Simplified)": "zh-CN",
+  "Chinese (Traditional)": "zh-TW"
+};
 
 $(document).ready(function() {
   $("#modeSwitch").change(function() {
