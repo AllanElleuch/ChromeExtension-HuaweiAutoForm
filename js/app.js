@@ -8,34 +8,34 @@ $("#inputIntroduction").val(desc);
 $("#inputBriefIntroduction").val(brief);
 // $("#sourceLangSelector").val(sourceLangSelector);
 
-$(document).ready(function() {
+$(document).ready(function () {
   $("#inputName").trigger("keyup");
   $("#inputIntroduction").trigger("keyup");
   $("#inputBriefIntroduction").trigger("keyup");
 });
 
-$("#inputName").change(function() {
+$("#inputName").change(function () {
   var selected = $("#inputName", this);
   var valueSelected = this.value;
   console.log(valueSelected);
   localStorage.setItem("name", valueSelected);
 });
 
-$("#inputIntroduction").change(function() {
+$("#inputIntroduction").change(function () {
   var selected = $("#inputIntroduction", this);
   var valueSelected = this.value;
   console.log(valueSelected);
   localStorage.setItem("desc", valueSelected);
 });
 
-$("#inputBriefIntroduction").change(function() {
+$("#inputBriefIntroduction").change(function () {
   var selected = $("#inputBriefIntroduction", this);
   var valueSelected = this.value;
   console.log(valueSelected);
   localStorage.setItem("brief", valueSelected);
 });
 
-$("#sourceLangSelector").change(function() {
+$("#sourceLangSelector").change(function () {
   var selected = $("#sourceLangSelector");
   var valueSelected = selected.val();
   console.log(valueSelected);
@@ -234,8 +234,8 @@ var freemium = {
   "Chinese (Traditional)": "zh-TW"
 };
 
-$(document).ready(function() {
-  $("#modeSwitch").change(function() {
+$(document).ready(function () {
+  $("#modeSwitch").change(function () {
     $("#previouslang").toggle();
     $("#nextlang").toggle();
     $("#btnImport").toggle();
@@ -244,7 +244,7 @@ $(document).ready(function() {
 
   optionSourceLang = $("#sourceLangSelector");
 
-  $.each(supportedLanguage2, function(key, value) {
+  $.each(supportedLanguage2, function (key, value) {
     console.log(key);
     console.log(value);
 
@@ -315,8 +315,8 @@ $(document).ready(function() {
     }
   }
 
-  var decode = function(str) {
-    return str.replace(/&#(\d+);/g, function(match, dec) {
+  var decode = function (str) {
+    return str.replace(/&#(\d+);/g, function (match, dec) {
       return String.fromCharCode(dec);
     });
   };
@@ -328,13 +328,13 @@ $(document).ready(function() {
   }
 
   function decodeFormating(text) {
-    var encodedText = text.replace(/[<n>]+/g, "\n");
-    encodedText = encodedText.replace(/[<r>]+/g, "\r");
+    var encodedText = text.replace(/<n>+/g, "\n");
+    encodedText = encodedText.replace(/<r>+/g, "\r");
     return encodedText;
   }
 
   function popupToForm() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var lang = $("#inputSupported").val();
       var message = {
         intent: "import",
@@ -347,8 +347,8 @@ $(document).ready(function() {
           active: true,
           currentWindow: true
         },
-        function(tabs) {
-          chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+        function (tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
             console.log(`popupToForm resolving : ${response}`);
             resolve(response);
           });
@@ -358,7 +358,7 @@ $(document).ready(function() {
   }
 
   function nextLang() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var message = {
         intent: "nextlang"
       };
@@ -367,8 +367,8 @@ $(document).ready(function() {
           active: true,
           currentWindow: true
         },
-        function(tabs) {
-          chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+        function (tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
             console.log(`nextLang getting : ${response}`);
             resolve(response);
           });
@@ -378,7 +378,7 @@ $(document).ready(function() {
   }
 
   function previousLang() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var message = {
         intent: "previouslang"
       };
@@ -387,8 +387,8 @@ $(document).ready(function() {
           active: true,
           currentWindow: true
         },
-        function(tabs) {
-          chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+        function (tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
             console.log(`nextLang getting : ${response}`);
             resolve(response);
           });
@@ -406,7 +406,7 @@ $(document).ready(function() {
    */
 
   function selectSupportedLang() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var message = {
         intent: "selectSupportedLang",
         lang: supportedLanguage2
@@ -416,8 +416,8 @@ $(document).ready(function() {
           active: true,
           currentWindow: true
         },
-        function(tabs) {
-          chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+        function (tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
             console.log(`selectSupportedLang get : ${response}`);
             resolve(response);
           });
@@ -427,7 +427,7 @@ $(document).ready(function() {
   }
 
   function getlang() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var message = {
         intent: "getlang"
       };
@@ -436,8 +436,8 @@ $(document).ready(function() {
           active: true,
           currentWindow: true
         },
-        function(tabs) {
-          chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+        function (tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
             console.log(`getlang get : ${response}`);
             $("#inputLang").val(response);
             $("#inputSupported").val(supportedLanguage2[response]);
@@ -458,7 +458,7 @@ $(document).ready(function() {
 
   $("#selectLang").on("click", selectSupportedLang);
 
-  $("#inject").on("click", function() {
+  $("#inject").on("click", function () {
     var message = {
       intent: "inject"
     };
@@ -467,15 +467,15 @@ $(document).ready(function() {
         active: true,
         currentWindow: true
       },
-      function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+      function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
           console.log(response);
         });
       }
     );
   });
 
-  $("#translateAll").on("click", async function() {
+  $("#translateAll").on("click", async function () {
     // var message = {
     //   intent: "translateAll"
     // }
