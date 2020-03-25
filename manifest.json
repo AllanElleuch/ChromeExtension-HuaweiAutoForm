@@ -22,7 +22,8 @@
   "content_scripts": [
     {
       "matches": [
-        "*://developer.huawei.com/consumer/cn/service/josp/agc/index.html"
+        "*://developer.huawei.com/*",
+        "*://www.google.com/*"
       ],
       "all_frames": true,
       "js": [

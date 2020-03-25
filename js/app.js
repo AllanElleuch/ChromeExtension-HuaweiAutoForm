@@ -320,6 +320,8 @@ $(document).ready(function () {
     }
   }
 
+
+
   var decode = function (str) {
     return str.replace(/&#(\d+);/g, function (match, dec) {
       return String.fromCharCode(dec);
@@ -338,14 +340,46 @@ $(document).ready(function () {
     return encodedText;
   }
 
+
+
+  function translate3String(string1, string2, string3, targetLang, separator = "<separator>") {
+
+    let concat = concatString(string1, string2, separator)
+    concat = concatString(concat, string3, separator)
+    console.log(`Concat  string : ${concat}`)
+
+    let translated = translate(concat, targetLang);
+    console.log(`Concat Translated string : ${translated}`)
+    let res = translated.split(separator)
+    console.log(`separator : ${separator}`)
+    console.log(`split Translated string : ${res}`)
+
+    return res
+  }
+
+  function concatString(string1, string2, separator) {
+
+    return `${string1}${separator}${string2}`
+  }
+
+
   function popupToForm() {
     return new Promise(function (resolve, reject) {
-      var lang = $("#inputSupported").val();
+      let name = $("#inputName")[0].value;
+      let description = $("#inputIntroduction")[0].value;
+      let brief = $("#inputBriefIntroduction")[0].value;
+      var targetLang = $("#inputSupported").val();
+
+      let translatedAsOneRequest = translate3String(name, description, brief, targetLang)
+      name = translatedAsOneRequest[0];
+      description = translatedAsOneRequest[1];
+      brief = translatedAsOneRequest[2];
+
       var message = {
         intent: "import",
-        name: translate($("#inputName")[0].value, lang),
-        description: translate($("#inputIntroduction")[0].value, lang),
-        brief: translate($("#inputBriefIntroduction")[0].value, lang)
+        name: name,
+        description: description,
+        brief: brief
       };
       chrome.tabs.query(
         {
@@ -361,6 +395,7 @@ $(document).ready(function () {
       );
     }); // end promisse
   }
+
 
   function nextLang() {
     return new Promise(function (resolve, reject) {
