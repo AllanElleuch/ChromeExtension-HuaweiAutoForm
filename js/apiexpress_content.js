@@ -8,6 +8,9 @@
 // }
 // injectScript(chrome.extension.getURL('js/injectScript.js'), 'body');
 
+console.log(`Api express loaded to ${window.location.href}`);
+
+
 function getElementByXpath(path) {
   return document.evaluate(
     path,
@@ -18,9 +21,9 @@ function getElementByXpath(path) {
   ).singleNodeValue;
 }
 
-$(document).ready(function() {
-  if (location.href.includes("appinfo")) {
-    chrome.runtime.onMessage.addListener(function(
+$(document).ready(function () {
+  if (location.href.includes("appinfo") || true) {
+    chrome.runtime.onMessage.addListener(function (
       request,
       sender,
       sendResponse
@@ -60,11 +63,15 @@ $(document).ready(function() {
 
       if (request.intent == "getlang") {
         console.log("START getlang");
-        var lang = getElementByXpath(
-          "/html/body/main/section/div[1]/div[4]/div[3]/div[1]/div/div/div[2]/div[1]/div/div/div[1]/span/span[2]"
-        );
+        // var lang = getElementByXpath(
+        //   "/html/body/main/section/div[1]/div[4]/div[3]/div[1]/div/div/div[2]/div[1]/div/div/div[1]/span/span[2]"
+        // ); $(".ui-select-match span [ng-transclude]").first()
+        var lang = $(".ui-select-match span [ng-transclude]")[0].textContent
+        // $(".ui-select-match span [ng-transclude]")[0].textContent.match(/\S.*\S/)[0]
         if (lang) {
-          sendResponse(lang.innerText);
+          let cleanWhiteSPace = lang.match(/\S.*\S/)[0]
+          let cleanDefault = cleanWhiteSPace.replace('-default', '');
+          sendResponse(cleanDefault);
         }
       }
 
@@ -118,17 +125,17 @@ $(document).ready(function() {
             );
 
             langBtn.each((id, element) => {
-              console.log(element.innerText);
+              // console.log(element.innerText);
               if (element.innerText in supportedLanguage) {
                 $(element).click();
               }
             });
-          }, 1000);
+          }, 2000);
           setTimeout(() => {
-            console.log("second timeout ");
-            console.log($(".ngdialog .dialog-footer .btn-primary"));
+            // console.log("second timeout ");
+            // console.log($(".ngdialog .dialog-footer .btn-primary"));
             $(".ngdialog .dialog-footer .btn-primary")[0].click();
-          }, 3000);
+          }, 4000);
 
           //   var promiss = new Promise(function(resolve, reject) {
 
@@ -139,9 +146,8 @@ $(document).ready(function() {
       }
     });
 
-    console.log("Script loaded");
 
-    window.addEventListener("message", function(event) {
+    window.addEventListener("message", function (event) {
       this.console.log("event");
       this.console.log(event.data.text);
       // We only accept messages from ourselves
@@ -152,12 +158,12 @@ $(document).ready(function() {
       }
     });
 
-    document.addEventListener("RW759_connectExtension", function(e) {
-      // e.detail contains the transferred data (can be anything, ranging
-      // from JavaScript objects to strings).
-      // Do something, for example:
-      alert(e.detail);
-    });
+    // document.addEventListener("RW759_connectExtension", function (e) {
+    //   // e.detail contains the transferred data (can be anything, ranging
+    //   // from JavaScript objects to strings).
+    //   // Do something, for example:
+    //   alert(e.detail);
+    // });
 
     // var port = chrome.runtime.connect({name: "knockknock"});
     // port.postMessage({joke: "Knock knock"});
@@ -168,23 +174,23 @@ $(document).ready(function() {
     //     port.postMessage({answer: "Madame... Bovary"});
     // });
 
-    chrome.runtime.onConnect.addListener(function(port) {
-      console.assert(port.name == "knockknock");
-      port.onMessage.addListener(function(msg) {
-        if (msg.joke == "Knock knock")
-          port.postMessage({
-            question: "Who's there?"
-          });
-        else if (msg.answer == "Madame")
-          port.postMessage({
-            question: "Madame who?"
-          });
-        else if (msg.answer == "Madame... Bovary")
-          port.postMessage({
-            question: "I don't get it."
-          });
-      });
-    });
+    // chrome.runtime.onConnect.addListener(function (port) {
+    //   console.assert(port.name == "knockknock");
+    //   port.onMessage.addListener(function (msg) {
+    //     if (msg.joke == "Knock knock")
+    //       port.postMessage({
+    //         question: "Who's there?"
+    //       });
+    //     else if (msg.answer == "Madame")
+    //       port.postMessage({
+    //         question: "Madame who?"
+    //       });
+    //     else if (msg.answer == "Madame... Bovary")
+    //       port.postMessage({
+    //         question: "I don't get it."
+    //       });
+    //   });
+    // });
   }
 });
 

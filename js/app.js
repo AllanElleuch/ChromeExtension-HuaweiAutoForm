@@ -289,6 +289,9 @@ $(document).ready(function () {
   // }
 
   function translate(text, targetLang) {
+    if (targetLang === "") {
+      return "";
+    }
     var settings = {
       async: false,
       crossDomain: true,
@@ -303,6 +306,8 @@ $(document).ready(function () {
       }
     };
     data = $.ajax(settings).responseJSON;
+    console.log("settings ");
+    console.log(settings);
     console.log("json");
     console.log(data);
     if (data) {
@@ -398,7 +403,15 @@ $(document).ready(function () {
   }
 
   function getLangAndTranslate() {
-    getlang().then(popupToForm());
+    console.log("Call getLangAndTranslate")
+    getlang().then((isLangSupported) => {
+      if (!isLangSupported) {
+        console.log("Lang is not supported for transaltion ")
+      }
+      popupToForm()
+
+
+    });
   }
 
   /**
@@ -503,8 +516,12 @@ $(document).ready(function () {
     // }
     var end = false;
     while (!end) {
-      await getlang();
-      await popupToForm();
+      let isTranslatable = await getlang();
+      if (!isTranslatable) {
+        end = true;
+      } else {
+        await popupToForm();
+      }
       // await sleep(500);
 
       var isNext = await nextLang();

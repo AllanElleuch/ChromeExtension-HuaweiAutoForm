@@ -1,168 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Import this Product</title>
-    <!-- <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" /> -->
-    <link rel="stylesheet" type="text/css" href="./css/bootstrap.3.min.css" />
 
-    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <title>Import this Product</title>
+  <!-- <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" /> -->
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap.3.min.css" />
 
-  <body>
-    <div class="menu-container">
-      <div class="card">
-        <div class="content">
-          <div class="main">
-            <div class="row col-xs-12">
-              <h2>Huawei Translator</h2>
-              <hr>
-              <h4 class="subTitle">
-                Translate your app description to 105 languages in no time
-              </h4 >
-            </div>
+  <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+</head>
 
-            <form class="row">
-              <div class="form-group  col-xs-12">
-                <label for="labelSourceLang">Source lang for description</label>
-                <div class="vertical-align-container">
-                  <div class="gtx-language">
-                    <select
-                      class="gtx-lang-selector"
-                      id="sourceLangSelector"
-                    ></select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group  col-xs-12">
-                <label for="labelName">Name</label>
-                <div class="vertical-align-container">
-                  <input
-                    type="text"
-                    class="form-control input"
-                    id="inputName"
-                    maxlength="64"
-                    placeholder="Enter text..."
-                    required=""
-                  />
-                  <span class="input-tips" id="spanName">0/64</span>
-                </div>
-              </div>
-              <div class="form-group  col-xs-12 ">
-                <label for="inputIntroduction">Introduction</label>
-                <div class="vertical-align-container">
-                  <textarea
-                    type="text"
-                    class="txt-area input form-control "
-                    id="inputIntroduction"
-                    placeholder="Enter text..."
-                    required=""
-                    maxlength="8000"
-                  ></textarea>
-
-                  <span
-                    class="input-tips vertical-child-container"
-                    id="spanIntroduction"
-                    >0/8000</span
-                  >
-                </div>
-              </div>
-              <div class="form-group col-xs-12">
-                <label for="labelBriefIntroduction">Brief introduction</label>
-
-                <div class="vertical-align-container">
-                  <textarea
-                    type="text"
-                    class="form-control input"
-                    id="inputBriefIntroduction"
-                    placeholder="Enter text..."
-                    required=""
-                    maxlength="80"
-                  ></textarea>
-                  <span id="spanBriefIntro" class="input-tips">0/80</span>
-                </div>
-              </div>
-              <div class="form-group col-xs-12 hidden">
-                <label for="labelLang">detected language</label>
-                <input
-                  type="text"
-                  class="form-control "
-                  id="inputLang"
-                  placeholder="Enter text..."
-                  required=""
-                />
-              </div>
-
-              <div class="form-group col-xs-12 hidden">
-                <label for="labelSupported">supported</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputSupported"
-                  placeholder="Enter text..."
-                  required=""
-                />
-              </div>
-            </form>
+<body>
+  <div class="menu-container">
+    <div class="card">
+      <div class="content">
+        <div class="main">
+          <div class="row col-xs-12">
+            <h2>Huawei Translator</h2>
+            <hr>
+            <h4 class="subTitle">
+              Translate your app description to 105 languages in no time
+            </h4>
           </div>
 
-          <div class="main-container">
-            <div class="left-container">
-              <button
-                id="selectLang"
-                class="btn btn-success  btn-block btn-import"
-              >
-                Select languages
-              </button>
-
-              <button
-                id="btnImport"
-                class="btn btn-success  btn-block btn-import "
-              >
-                translate current 
-              </button>
-
-              <button
-                id="translateAll"
-                class="btn btn-success  btn-block btn-import"
-              >
-                Translate all 
-              </button>
-
-       
-              <button
-                id="getlang"
-                class="btn btn-primary btn-warning btn-block btn-updateImport hidden"
-              >
-                get lang
-              </button>
-
+          <form class="row">
+            <div class="form-group  col-xs-12">
+              <label for="labelSourceLang">Source lang for description</label>
+              <div class="vertical-align-container">
+                <div class="gtx-language">
+                  <select class="gtx-lang-selector" id="sourceLangSelector"></select>
+                </div>
+              </div>
             </div>
-            <div class="right-container">
-              <div id="previouslang" href="#" class="btn btn-info btn-lg">
-                <span class="glyphicon glyphicon-arrow-up"></span> Up
-              </div>
 
-              <div id="nextlang" href="#" class="btn btn-info btn-lg btn-block">
-                <span class="glyphicon glyphicon-arrow-down"></span> Down
+            <div class="form-group  col-xs-12">
+              <label for="labelName">Name</label>
+              <div class="vertical-align-container">
+                <input type="text" class="form-control input" id="inputName" maxlength="64" placeholder="Enter text..."
+                  required="" />
+                <span class="input-tips" id="spanName">0/64</span>
               </div>
+            </div>
+            <div class="form-group  col-xs-12 ">
+              <label for="inputIntroduction">Introduction</label>
+              <div class="vertical-align-container">
+                <textarea type="text" class="txt-area input form-control " id="inputIntroduction"
+                  placeholder="Enter text..." required="" maxlength="8000"></textarea>
+
+                <span class="input-tips vertical-child-container" id="spanIntroduction">0/8000</span>
+              </div>
+            </div>
+            <div class="form-group col-xs-12">
+              <label for="labelBriefIntroduction">Brief introduction</label>
+
+              <div class="vertical-align-container">
+                <textarea type="text" class="form-control input" id="inputBriefIntroduction" placeholder="Enter text..."
+                  required="" maxlength="80"></textarea>
+                <span id="spanBriefIntro" class="input-tips">0/80</span>
+              </div>
+            </div>
+            <div class="form-group col-xs-12 ">
+              <label for="labelLang">detected language</label>
+              <input type="text" class="form-control " id="inputLang" placeholder="Enter text..." required="" />
+            </div>
+
+            <div class="form-group col-xs-12 hidden">
+              <label for="labelSupported">supported</label>
+              <input type="text" class="form-control" id="inputSupported" placeholder="Enter text..." required="" />
+            </div>
+          </form>
+        </div>
+
+        <div class="main-container">
+          <div class="left-container">
+            <button id="selectLang" class="btn btn-success  btn-block btn-import">
+              Select languages
+            </button>
+
+            <button id="btnImport" class="btn btn-success  btn-block btn-import ">
+              translate current
+            </button>
+
+            <button id="translateAll" class="btn btn-success  btn-block btn-import">
+              Translate all
+            </button>
+
+
+            <button id="getlang" class="btn btn-primary btn-warning btn-block btn-updateImport hidden">
+              get lang
+            </button>
+
+          </div>
+          <div class="right-container">
+            <div id="previouslang" href="#" class="btn btn-info btn-lg">
+              <span class="glyphicon glyphicon-arrow-up"></span> Up
+            </div>
+
+            <div id="nextlang" href="#" class="btn btn-info btn-lg btn-block">
+              <span class="glyphicon glyphicon-arrow-down"></span> Down
+            </div>
           </div>
 
-              
 
-              <!-- <button class="btn btn-primary btn-danger btn-block btn-updateImport " disabled>Translate All
+
+          <!-- <button class="btn btn-primary btn-danger btn-block btn-updateImport " disabled>Translate All
                             Language</button>
                         <button id="inject" class="btn btn-primary btn-danger btn-block btn-updateImport "
                             disabled>inject</button> -->
-    
+
         </div>
 
-<!-- Default switch -->
-<div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="modeSwitch">
-  <label class="custom-control-label" for="customSwitches">switch to advanced mode</label>
-</div>
+        <!-- Default switch -->
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="modeSwitch">
+          <label class="custom-control-label" for="customSwitches">switch to advanced mode</label>
+        </div>
 
 
       </div>
@@ -172,22 +124,12 @@
             <form class="row">
               <div class="form-group  col-xs-12">
                 <label for="inputTitle">Title</label>
-                <textarea
-                  class="form-control"
-                  id="inputTitle"
-                  placeholder="Enter Title..."
-                  required=""
-                ></textarea>
+                <textarea class="form-control" id="inputTitle" placeholder="Enter Title..." required=""></textarea>
               </div>
               <div class="form-group  col-xs-12">
                 <label for="inputShippingCost">Shipping Cost</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputShippingCost"
-                  placeholder="Enter Shipping cost..."
-                  required=""
-                />
+                <input type="text" class="form-control" id="inputShippingCost" placeholder="Enter Shipping cost..."
+                  required="" />
               </div>
               <div class="form-group col-xs-12">
                 <label for="inputQuantity">category</label>
@@ -196,11 +138,7 @@
                   <div class="treecategories-cnt">
                     <div id="treeCategories"></div>
                     <div class="categories-list-menu" style="display: block">
-                      <button
-                        type="button"
-                        class="back-cat-btn btn-xs btn-primary"
-                        style="display: none"
-                      >
+                      <button type="button" class="back-cat-btn btn-xs btn-primary" style="display: none">
                         <i class="glyphicon glyphicon-arrow-left"></i>
                       </button>
                     </div>
@@ -220,5 +158,6 @@
     <script src="./js/bs-treeview.min.js"></script>
     <script src="./js/app.js"></script>
     <script src="./js/frontUI.js"></script>
-  </body>
+</body>
+
 </html>
