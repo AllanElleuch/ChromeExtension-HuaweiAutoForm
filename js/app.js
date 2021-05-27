@@ -6,7 +6,6 @@ var sourceLangSelector = localStorage.getItem("sourceLangSelector");
 $("#inputName").val(name);
 $("#inputIntroduction").val(desc);
 $("#inputBriefIntroduction").val(brief);
-// $("#sourceLangSelector").val(sourceLangSelector);
 
 $(document).ready(function () {
   $("#inputName").trigger("keyup");
@@ -263,30 +262,7 @@ $(document).ready(function () {
     }
   });
 
-  // function translate(text, targetLang) {
-  //   var settings = {
-  //     async: false,
-  //     crossDomain: true,
-  //     url: "https://google-translate1.p.rapidapi.com/language/translate/v2",
-  //     method: "POST",
-  //     headers: {
-  //       "x-rapidapi-host": "google-translate1.p.rapidapi.com",
-  //       "x-rapidapi-key": "407e38fc61msh9aa66a9888202ecp1eb0f4jsn21e3b5654c7a",
-  //       "content-type": "application/x-www-form-urlencoded"
-  //     },
-  //     data: {
-  //       source: "en",
-  //       q: text,
-  //       target: targetLang
-  //     }
-  //   };
-  //   data = $.ajax(settings).responseJSON.data;
-  //   if (data) {
-  //     return data.translations[0].translatedText;
-  //   } else {
-  //     return text;
-  //   }
-  // }
+
 
   function translate(text, targetLang) {
     if (targetLang === "") {
@@ -524,31 +500,11 @@ $(document).ready(function () {
   });
 
   $("#translateAll").on("click", async function () {
-    // var message = {
-    //   intent: "translateAll"
-    // }
-    // chrome.tabs.query({
-    //   active: true,
-    //   currentWindow: true
-    // }, function (tabs) {
-    //   chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
-    //     console.log(response);
-    //   });
-    // });
+
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    // getlang();
-    // await sleep(200);
-    // popupToForm();
-
-    // while (nextLang()) {
-    //   await sleep(500);
-    //   getlang();
-    //   await sleep(500);
-    //   popupToForm();
-    // }
     var end = false;
     while (!end) {
       let isTranslatable = await getlang();
@@ -570,48 +526,3 @@ $(document).ready(function () {
   $("#getlang").on("click", getlang); // end promisse
 });
 
-// var port = chrome.tabs.connect({name: "knockknock"});
-// port.postMessage({joke: "Knock knock"});
-// port.onMessage.addListener(function(msg) {
-//   if (msg.question == "Who's there?")
-//     port.postMessage({answer: "Madame"});
-//   else if (msg.question == "Madame who?")
-//     port.postMessage({answer: "Madame... Bovary"});
-// });
-
-// chrome.runtime.onMessageExternal.addListener(
-//     function(request, sender, sendResponse) {
-//         console.log(request);
-//         console.log(sender);
-//         console.log("RECEIVE EXTERNAL")
-
-//         var message = {intent: "inject"
-//     }
-//         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//             chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
-//               console.log(response);
-//             });
-//           });
-
-//     });
-
-// chrome.runtime.onMessage.addListener(
-//     function(request, sender, sendResponse) {
-//       console.log(sender.tab ?
-//                   "from a content script:" + sender.tab.url :
-//                   "from the extension");
-//       if (request.greeting == "hello")
-//         sendResponse({farewell: "goodbye"});
-//     });
-
-//     chrome.runtime.onConnect.addListener(function(port) {
-//         console.assert(port.name == "knockknock");
-//         port.onMessage.addListener(function(msg) {
-//           if (msg.joke == "Knock knock")
-//             port.postMessage({question: "Who's there?"});
-//           else if (msg.answer == "Madame")
-//             port.postMessage({question: "Madame who?"});
-//           else if (msg.answer == "Madame... Bovary")
-//             port.postMessage({question: "I don't get it."});
-//         });
-//       });
