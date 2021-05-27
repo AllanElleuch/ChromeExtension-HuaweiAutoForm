@@ -1,7 +1,7 @@
 # ChromeExtension- Scrapper
 
 # Description 
-This extension allow you to translate automatically in every languages an Android APP description on the play store. This allow you to reach as much people as possible on the market.
+This extension allow you to translate automatically your Android APP description in every languages for the Huawei Store. This way you can reach as much possible users as possible.  Another extension exist for the Play Store but is private. 
 
 # How to use (french description)
 
